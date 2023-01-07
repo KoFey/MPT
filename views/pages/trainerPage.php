@@ -1,5 +1,5 @@
 <?php
-    if(!empty($_GET['trainer'])) {
+    if (!empty($_GET['trainer'])) {
 
     }
 ?>
@@ -28,22 +28,27 @@
     <div class="container text-center mt-4" style="font-size: 100px">
         <div class="d-inline">
         <span id="x" style="color: deepskyblue">
-            5
+
         </span>
             x
             <span id="y" style="color: orange">
-            8
+
         </span>
             =
         </div>
         <div id="answer_box" class="d-inline">
-            1
+
+        </div>
+    </div>
+    <div class="btn-toolbar justify-content-between" role="toolbar">
+        <div class="btn-group m-auto" role="group" aria-label="First group">
+            <button class="btn btn-light" onclick="">Не знаю</button>
+        </div>
+        <div class="input-group">
+            <button class="btn-primary">Ответить</button>
         </div>
     </div>
 
-    <div class="text-center">
-        <button class="btn btn-light" onclick="">Не знаю</button>
-    </div>
 </div>
 
 <script src="/assets/js/trainerScripts.js"></script>

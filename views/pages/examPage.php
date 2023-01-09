@@ -1,9 +1,3 @@
-<?php
-    if (empty($_GET['trainer'])) {
-        header("Location: error");
-    }
-?>
-
 <!doctype html>
 <html lang="ru">
 <?php
@@ -83,7 +77,7 @@
     </div>
     <div class="btn-toolbar justify-content-between" role="toolbar">
         <div class="btn-group m-auto" role="group" aria-label="First group">
-            <a href="/trainerPage?trainer=<?php echo $_GET['trainer']?>" class="btn btn-warning">Заново</a>
+            <a href="/examPage" class="btn btn-warning">Заново</a>
         </div>
         <div class="input-group">
             <a class="btn-primary btn" href="/trainerMainPage">Вернуться к выбору тренажеров</a>
@@ -91,7 +85,7 @@
     </div>
 </div>
 
-<script src="/assets/js/trainerScripts.js"></script>
+<script src="/assets/js/examScript.js"></script>
 
 </body>
 </html>

@@ -33,7 +33,6 @@
         {
             $query = $_GET['q'];
             foreach (self::$list as $route) {
-
                 if ($route['uri'] === '/' . $query) {
                     if ($route["post"] === true) {
                         $action = new $route["class"];

@@ -18,7 +18,7 @@
                       <h4 class="card-title">Таблица умножения на $i</h4>
                     </div>
                     <div class="card-footer text-center">
-                      <a href="/views/pages/trainerPage.php?trainer=$i" class="btn btn-primary">Начать</a>
+                      <a href="/trainerPage?trainer=$i" class="btn btn-primary">Начать</a>
                     </div>
                 </div>
             </div>
@@ -28,15 +28,18 @@ nnn;
     ?>
 
 </div>
-<div class="col mb-4">
-    <div class="card text-center">
-        <div class="card-body">
-            <h4 class="card-title">В перемешку</h4>
-        </div>
-        <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary">Начать</a>
+<div class="container">
+    <div class="col mb-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-title">Случайные варианты</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/examPage" class="btn btn-primary">Начать</a>
+            </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

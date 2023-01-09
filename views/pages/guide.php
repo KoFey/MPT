@@ -150,7 +150,7 @@
                 <img src="/photo/greyback.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption h-50">
                     <h3>Попробуйте наш тренажер устного счета, чтобы проверить свои знания :)</h3>
-                    <a class="btn btn-primary" href="#" role="button">Тренажер</a>
+                    <a class="btn btn-primary" href="/trainerMainPage" role="button">Тренажер</a>
 
                 </div>
             </div>

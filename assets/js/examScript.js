@@ -1,5 +1,4 @@
 const quests = [];
-const trainerId = $_GET('trainer');
 
 const wrong = new Audio("../../audio/wrong.mp3");
 const correct = new Audio("../../audio/correct.mp3");
@@ -15,49 +14,36 @@ const nextbtn = document.getElementById("btn_next");
 const btn_skip = document.getElementById("btn_skip");
 
 let counter = 0;
-const max = 10;
+const max = 15;
 
 document.getElementById('maxQuests').innerText = "из " + max;
 
 let ans;
 
+getQuest();
 
-if (trainerId === 'test') {
-    getQuestForTest();
-} else
-    getQuest();
-
-
-function getQuestForTest() {
-    fetch("/trainer/createQuest", {
+function getQuest() {
+    formDate = new FormData();
+    formDate.set("max", max);
+    fetch('/trainer/createExam', {
         method: 'POST',
+        body: formDate,
     })
         .then(response => response.json())
         .then(data => {
-
-        });
-}
-
-function getQuest() {
-    if ($_GET('trainer') !== false) {
-        fetch('/trainer/createQuest', {
-            method: 'POST',
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.length > 0) {
-                    data.forEach(e => {
-                        quests.push([e, e * trainerId]);
-                        X.innerText = quests[counter][0];
-                        Y.innerText = trainerId;
-                        ans = quests[counter][1];
-                    })
-                }
-            }).then(() => {
-            let preloaderEl = document.getElementById('preloader');
-            preloaderEl.classList.add('d-none');
-        });
-    }
+            console.log(data);
+            if (data && data.length > 0) {
+                data.forEach(e => {
+                    quests.push(e);
+                    X.innerText = quests[counter][0];
+                    Y.innerText = quests[counter][1];
+                    ans = quests[counter]["sum"];
+                })
+            }
+        }).then(() => {
+        let preloaderEl = document.getElementById('preloader');
+        preloaderEl.classList.add('d-none');
+    });
 }
 
 document.addEventListener('keydown', function (event) {
@@ -66,9 +52,11 @@ document.addEventListener('keydown', function (event) {
         answer.innerText = answer.innerText.slice(0, -1);
     } else for (i = 0; i < KEY.length; i++) {
         if (event.code === "Digit" + KEY[i]) {
+            if(answer.innerText === "end") {
+                return;
+            }
             if (answer.innerText.length == ans.toString().length) {
                 wrong.play();
-                $('#element').toast('hide');
             } else {
                 answer.innerText += KEY[i];
             }
@@ -101,7 +89,7 @@ function generateInfo() {
         spanPercent.classList.add("active");
     }
 
-    time.innerText = Math.floor((dateEnd - dateStart)/1000) + " сек";
+    time.innerText = Math.floor((dateEnd - dateStart) / 1000) + " сек";
 
     count.innerText = counter
 
@@ -119,16 +107,15 @@ function next(skip = false) {
         dateStart = new Date();
     }
     if (parseInt(answer.innerText) === ans && !skip) {
-        progress.innerHTML += `<div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>`;
+        progress.innerHTML += `<div class="progress-bar bg-success" role="progressbar" style="width: `+100/max+`%" aria-valuenow="`+100/max+`" aria-valuemin="0" aria-valuemax="100"></div>`;
         correct.play();
     } else {
-        progress.innerHTML += `<div class="progress-bar bg-danger" role="progressbar" style="width: 10%" aria-valuenow="10"
+        progress.innerHTML += `<div class="progress-bar bg-danger" role="progressbar" style="width: `+100/max+`%" aria-valuenow="`+100/max+`"
              aria-valuemin="0" aria-valuemax="100"></div>`;
         wrong.play();
     }
     if (counter >= max) {
         answer.innerText = "end";
-
 
         dateEnd = new Date();
 
@@ -138,16 +125,10 @@ function next(skip = false) {
         generateInfo();
 
     } else {
-        let rand = Math.floor(Math.random() * 2);
-        if (rand) {
-            X.innerText = trainerId;
-            Y.innerText = quests[counter][0];
-        } else {
-            Y.innerText = trainerId;
-            X.innerText = quests[counter][0];
-        }
+        X.innerText = quests[counter][0];
+        Y.innerText = quests[counter][1];
         answer.innerText = "";
-        ans = quests[counter][1];
+        ans = quests[counter]["sum"];
     }
 }
 

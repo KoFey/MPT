@@ -8,4 +8,5 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
 
     <script src="/assets/js/jQuery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 </head>

@@ -14,5 +14,6 @@
 
     Router::post("/trainer/createQuest",Trainer::class, "generateQuest");
     Router::post("/trainer/createExam",Trainer::class, "generateExam", true);
+    Router::post("/trainer/setting",Trainer::class, "sessionPerem", true);
 
     Router::enable();

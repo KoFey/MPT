@@ -17,6 +17,8 @@
     </div>
     <?php
         require_once "views/components/navbar.php";
+
+        require_once "views/components/settings.php";
     ?>
     <div class='row'>
         <?php
@@ -39,7 +41,7 @@
 
         </span>
                     </div>
-                    <p>Вы ввели:</p>
+                    <p>Введено:</p>
                     <div class="d-flex justify-content-center" style="margin-bottom: 30px">
                         <div id="answer_box" class="d-block"
                              style="width: 200px;height: 150px;background-color: #909595; border-radius: 20px">
@@ -49,10 +51,8 @@
                 </div>
                 <div class="btn-toolbar justify-content-between" role="toolbar">
                     <div class="btn-group m-auto" role="group" aria-label="First group">
-                        <button class="btn btn-secondary" id="btn_skip" onclick="next(true)">Не знаю</button>
-                    </div>
-                    <div class="input-group">
-                        <button type="button" class="btn btn-primary btn-lg" id="btn_next" onclick="next()">Ответить
+                        <button class="btn btn-secondary" style="font-size: 36px" id="btn_skip" onclick="next(true)">Не знаю</button>
+                        <button type="button" class="btn btn-primary btn-lg" style="margin-left: 10px; font-size: 36px" id="btn_next" onclick="next()">Ответить
                         </button>
                     </div>
                 </div>

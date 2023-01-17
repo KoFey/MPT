@@ -55,6 +55,10 @@
             self::not_found_page();
         }
 
+        public static function redirect($url) {
+            header("Location: ". $url);
+        }
+
         private static function not_found_page() {
             require_once "views/errors/404.php";
         }

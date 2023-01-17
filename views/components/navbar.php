@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="padding-bottom: 20px; background-color: #d7d7d7">
-    <a class="navbar-brand" href="/aboutProject">Multiplication table</a>
+    <a class="navbar-brand" style="font-size: 36px" href="/aboutProject">УмноЖ</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

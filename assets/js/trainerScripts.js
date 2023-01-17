@@ -22,11 +22,7 @@ document.getElementById('maxQuests').innerText = "из " + max;
 let ans;
 
 
-if (trainerId === 'test') {
-    getQuestForTest();
-} else
-    getQuest();
-
+getQuest();
 
 function getQuestForTest() {
     fetch("/trainer/createQuest", {

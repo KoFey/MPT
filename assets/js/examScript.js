@@ -14,11 +14,18 @@ const nextbtn = document.getElementById("btn_next");
 const btn_skip = document.getElementById("btn_skip");
 
 let counter = 0;
-let max = 15;
-
+let max = getCookie("settings[countQuest]");
+console.log(max);
 let ans;
 
 getQuest();
+
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 
 function reset() {
     progress.innerHTML = "";
@@ -33,11 +40,8 @@ function reset() {
 
 function getQuest() {
     reset();
-    formDate = new FormData();
-    formDate.set("max", max);
     fetch('/trainer/createExam', {
         method: 'POST',
-        body: formDate,
     })
         .then(response => response.json())
         .then(data => {
@@ -142,17 +146,6 @@ function next(skip = false) {
         answer.innerText = "";
         ans = quests[counter]["sum"];
     }
-}
-
-function setting() {
-    max = document.getElementById("formGroupCountInput").value;
-    formDate = new FormData();
-    formDate.set("countQuest", max);
-    fetch('/trainer/setting', {
-        method: 'POST',
-        body: formDate,
-    })
-    getQuest();
 }
 
 function $_GET(key) {

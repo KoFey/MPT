@@ -8,45 +8,74 @@
         static $start = 1;
         static $end = 10;
 
-        public static function sessionPerem($data = null)
+        public static function start()
         {
-            $countQuest = empty($data["formGroupCountInput"]) ? 15 : $data["formGroupCountInput"];
-            $_SESSION['countQuest'] = $countQuest;
+            if (empty($_COOKIE['settings'])) {
+                setcookie("settings[order]", "random");
+                setcookie("settings[countQuest]", "15");
+            }
+        }
+
+        public static function changeSettings($data)
+        {
+            setcookie("settings[order]", $data['order'], 0, "/");
+            setcookie("settings[countQuest]", $data['count'], 0, "/");
+            Router::redirect("/".$_GET['url']);
         }
 
         public static function generateQuest()
         {
             $array = array();
-            while (count($array) < self::$length) {
-                $array[mt_rand(self::$start, self::$end)] = "";
+            for ($i = self::$start; $i <= self::$end; $i++) $array[] = $i;
+            switch ($_COOKIE['settings']['order']) {
+                case "forward":
+                    echo json_encode($array);
+                    break;
+                case "back":
+                    $array = array_reverse($array);
+                    echo json_encode($array);
+                    break;
+                case "random":
+                    shuffle($array);
+                    echo json_encode($array);
+                    break;
             }
 
-            echo json_encode(array_keys($array));
         }
 
         public static function generateExam($data)
         {
             $array = array();
 
-            $max = $data['max'];
+            $max = $_COOKIE['settings']['countQuest'];
 
-            for($i = 1;$i<=self::$end;$i++) {
-                for ($ii = 1; $ii <= self::$end;$ii++) {
+            for ($i = 1; $i <= self::$end; $i++) {
+                for ($ii = 1; $ii <= self::$end; $ii++) {
                     $array[] = [
                         $i,
                         $ii,
                         "sum" => $i * $ii
                     ];
                 }
-
             }
-            $s = array();
-            for($i=0;$i<$max;$i++) {
-                $rnd1 = mt_rand(0,count($array)-1);
-                $s[] = $array[$rnd1];
-                unset($rnd1);
+            switch ($_COOKIE['settings']['order']) {
+                case "forward":
+                    echo json_encode(array_slice($array,0,$max));
+                    break;
+                case "back":
+                    $array = array_reverse($array);
+                    echo json_encode(array_slice($array,0,$max));
+                    break;
+                case "random":
+                    $s = array();
+                    for ($i = 0; $i < $max; $i++) {
+                        $rnd1 = mt_rand(0, count($array) - 1);
+                        $s[] = $array[$rnd1];
+                        unset($rnd1);
+                    }
+                    echo json_encode($s);
+                    break;
             }
-            echo json_encode($s);
         }
 
 

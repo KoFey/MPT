@@ -8,7 +8,7 @@
     require_once "views/components/navbar.php";
 ?>
 
-<div class="container card-group row-cols-3 mr-auto ml-auto">
+<div class="container card-group row-cols-3 mr-auto ml-auto mt-4">
     <?php
         for ($i = 1; $i < 11; $i++) {
             echo <<<nnn
